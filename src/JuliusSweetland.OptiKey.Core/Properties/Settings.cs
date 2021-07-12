@@ -4,7 +4,7 @@ using JuliusSweetland.OptiKey.Enums;
 using log4net;
 
 namespace JuliusSweetland.OptiKey.Properties {
-        
+
     public abstract class Settings : global::System.Configuration.ApplicationSettingsBase {
 
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -13,7 +13,7 @@ namespace JuliusSweetland.OptiKey.Properties {
         public abstract AppType GetApp();
 
         private static Settings defaultInstance;
-        
+
         // Settings singleton used by core library is configured by each executable with their own derived settings.       
         public static Settings Default {
             get {
@@ -42,7 +42,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerKeyboardKeyDownUpKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("NextHigh")]
@@ -55,7 +55,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionTriggerStopSignal"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Left")]
@@ -68,7 +68,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerMouseDownUpButton"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fixations")]
@@ -81,7 +81,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerSource"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -94,7 +94,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SettingsUpgradeRequired"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0130000")]
@@ -107,7 +107,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointsMousePositionSampleInterval"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -120,7 +120,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointsMousePositionHideCursor"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("MousePosition")]
@@ -133,7 +133,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointsSource"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.1500000")]
@@ -146,7 +146,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointTtl"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("40")]
@@ -159,7 +159,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerLockOnRadiusInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
@@ -172,7 +172,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerFixationRadiusInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:01.2500000")]
@@ -185,7 +185,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerFixationCompleteTime"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("6666")]
@@ -198,7 +198,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["GazeTrackerUdpPort"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -211,7 +211,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionLockedDownWhenSimulatingKeyStrokes"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.2500000")]
@@ -224,7 +224,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionFixationMinDwellTime"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
@@ -237,7 +237,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MaxDictionaryMatchesOrSuggestions"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:01:00")]
@@ -250,7 +250,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionMaxDuration"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("EnglishUK")]
@@ -263,20 +263,36 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["UiLanguage"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:01.2500000")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public global::System.TimeSpan KeySelectionTriggerFixationDefaultCompleteTime {
-            get {
+        public global::System.TimeSpan KeySelectionTriggerFixationDefaultCompleteTime
+        {
+            get
+            {
                 return ((global::System.TimeSpan)(this["KeySelectionTriggerFixationDefaultCompleteTime"]));
             }
-            set {
+            set
+            {
                 this["KeySelectionTriggerFixationDefaultCompleteTime"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(null)]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public string KeySelectionTriggerFixationDefaultCompleteTimes {
+            get {
+                return ((string)(this["KeySelectionTriggerFixationDefaultCompleteTimes"]));
+            }
+            set {
+                this["KeySelectionTriggerFixationDefaultCompleteTimes"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0")]
@@ -289,7 +305,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowFloatingSizeAndPosition"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("75")]
@@ -302,7 +318,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ToastNotificationVerticalFillPercentage"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0.02")]
@@ -315,7 +331,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ToastNotificationSecondsPerCharacter"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/Resources/Themes/Android_Dark.xaml")]
@@ -328,7 +344,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["Theme"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -341,7 +357,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["Debug"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/Resources/Fonts/#Roboto")]
@@ -354,7 +370,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["FontFamily"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Condensed")]
@@ -367,7 +383,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["FontStretch"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Light")]
@@ -380,7 +396,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["FontWeight"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
@@ -393,7 +409,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ScratchpadNumberOfLines"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -406,7 +422,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["AutoAddSpace"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -419,7 +435,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["AutoCapitalise"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -432,7 +448,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SpeechRate"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -445,7 +461,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SpeechVoice"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -458,7 +474,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SpeechVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Tone2.wav")]
@@ -471,7 +487,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ErrorSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Tone1.wav")]
@@ -484,7 +500,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["InfoSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Click1.wav")]
@@ -497,7 +513,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Falling1.wav")]
@@ -510,7 +526,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionCaptureEndSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Rising1.wav")]
@@ -523,7 +539,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionCaptureStartSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Fixations")]
@@ -536,7 +552,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerSource"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.7500000")]
@@ -549,7 +565,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerIncompleteFixationTtl"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.2500000")]
@@ -562,7 +578,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerFixationLockOnTime"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.2500000")]
@@ -575,7 +591,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerFixationLockOnTime"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -617,7 +633,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MoveAndResizeAdjustmentAmountInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("NextHigh")]
@@ -630,7 +646,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SelectionTriggerStopSignal"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -643,7 +659,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CheckForUpdates"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -656,7 +672,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ShowSplashScreen"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:03")]
@@ -669,7 +685,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["TETCalibrationCheckTimeSpan"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
@@ -682,7 +698,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseScrollAmountInClicks"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\MouseClick1.wav")]
@@ -695,7 +711,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseClickSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\MouseDoubleClick1.wav")]
@@ -708,7 +724,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDoubleClickSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\MouseScroll1.wav")]
@@ -721,7 +737,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseScrollSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
@@ -734,7 +750,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CursorWidthInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("90")]
@@ -747,7 +763,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CursorHeightInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -760,7 +776,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseMagnifierLockedDown"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
@@ -773,7 +789,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MagnifySourcePercentageOfScreen"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
@@ -786,7 +802,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MagnifyDestinationPercentageOfScreen"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("75")]
@@ -799,7 +815,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ToastNotificationHorizontalFillPercentage"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("25")]
@@ -812,7 +828,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CrashMessageFontSize"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -825,7 +841,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuggestWords"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:01:00")]
@@ -838,7 +854,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CalibrationMaxDuration"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Insert")]
@@ -851,7 +867,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerKeyboardKeyDownUpKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Left")]
@@ -864,7 +880,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PointSelectionTriggerMouseDownUpButton"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -877,7 +893,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuppressModifierKeysWhenInMouseKeyboard"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
@@ -890,7 +906,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["AutoCloseCrashMessageSeconds"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -903,7 +919,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ErrorSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -916,7 +932,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["InfoSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -929,7 +945,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -942,7 +958,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseClickSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -955,7 +971,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDoubleClickSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("75")]
@@ -968,7 +984,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseScrollSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -981,7 +997,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionCaptureEndSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -994,7 +1010,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionCaptureStartSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FillPie")]
@@ -1007,7 +1023,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ProgressIndicatorBehaviour"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1020,7 +1036,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ProgressIndicatorResizeStartProportion"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
@@ -1033,7 +1049,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ProgressIndicatorResizeEndProportion"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1046,7 +1062,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerFixationResumeRequiresLockOn"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -1059,7 +1075,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowFullDockThicknessAsPercentageOfScreen"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Top")]
@@ -1072,7 +1088,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowDockPosition"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Full")]
@@ -1085,7 +1101,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowDockSize"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
@@ -1098,7 +1114,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowOpacity"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Collapsed")]
@@ -1111,7 +1127,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseKeyboardDockSize"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Docked")]
@@ -1124,7 +1140,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowState"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
@@ -1137,7 +1153,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowCollapsedDockThicknessAsPercentageOfFullDockThickness"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Docked")]
@@ -1150,7 +1166,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowPreviousState"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1163,7 +1179,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionEnabled"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("25")]
@@ -1176,7 +1192,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseMoveAmountInPixels"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\MouseDown1.wav")]
@@ -1189,7 +1205,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDownSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\MouseUp1.wav")]
@@ -1202,7 +1218,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseUpSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1215,7 +1231,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDownSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1228,7 +1244,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseUpSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Alpha")]
@@ -1241,7 +1257,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["StartupKeyboard"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1254,7 +1270,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuppressAutoCapitaliseIntelligently"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1267,7 +1283,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MultiKeySelectionLockedDownWhenNotSimulatingKeyStrokes"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("SameAsDockedPosition")]
@@ -1280,7 +1296,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MainWindowMinimisedPosition"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Upper")]
@@ -1293,7 +1309,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeyCase"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Medium")]
@@ -1306,7 +1322,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["TobiiEyeXProcessingLevel"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("EnglishUK")]
@@ -1319,7 +1335,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeyboardAndDictionaryLanguage"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1332,7 +1348,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PublishVirtualKeyCodesForCharacters"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1345,7 +1361,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MagnifySuppressedForScrollingActions"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1,1,1,1")]
@@ -1358,7 +1374,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ConversationBorderThickness"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
@@ -1371,7 +1387,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["NGramAutoCompleteGramCount"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
@@ -1384,7 +1400,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["NGramAutoCompleteLeadingSpaceCount"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
@@ -1397,7 +1413,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["NGramAutoCompleteTrailingSpaceCount"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1410,7 +1426,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerFixationCompleteTimesByIndividualKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("NGram")]
@@ -1423,7 +1439,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuggestionMethod"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1436,7 +1452,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuppressModifierKeysForAllMouseActions"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Default")]
@@ -1449,7 +1465,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeyboardLayout"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1462,7 +1478,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["UseAlphabeticalKeyboardLayout"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1475,7 +1491,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["UseSimplifiedKeyboardLayout"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1488,7 +1504,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["EnableCommuniKateKeyboardLayout"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1501,7 +1517,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["UseCommuniKateKeyboardLayoutByDefault"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("toppage")]
@@ -1514,7 +1530,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateKeyboardCurrentContext"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1527,7 +1543,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateStagedForDeletion"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1540,7 +1556,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SuggestNextWords"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1553,72 +1569,33 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ForceCapsLock"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public int GazeSmoothingLevel {
+            get {
+                return ((int)(this["GazeSmoothingLevel"]));
+            }
+            set {
+                this["GazeSmoothingLevel"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool KalmanFilterEnabled {
+        public bool SmoothWhenChangingGazeTarget {
             get {
-                return ((bool)(this["KalmanFilterEnabled"]));
+                return ((bool)(this["SmoothWhenChangingGazeTarget"]));
             }
             set {
-                this["KalmanFilterEnabled"] = value;
+                this["SmoothWhenChangingGazeTarget"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterInitialValue {
-            get {
-                return ((double)(this["KalmanFilterInitialValue"]));
-            }
-            set {
-                this["KalmanFilterInitialValue"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterConfidenceOfInitialValue {
-            get {
-                return ((double)(this["KalmanFilterConfidenceOfInitialValue"]));
-            }
-            set {
-                this["KalmanFilterConfidenceOfInitialValue"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterProcessNoise {
-            get {
-                return ((double)(this["KalmanFilterProcessNoise"]));
-            }
-            set {
-                this["KalmanFilterProcessNoise"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public double KalmanFilterMeasurementNoise {
-            get {
-                return ((double)(this["KalmanFilterMeasurementNoise"]));
-            }
-            set {
-                this["KalmanFilterMeasurementNoise"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1631,7 +1608,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ConversationConfirmOnlyMode"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1644,7 +1621,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ConversationConfirmEnable"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -1657,7 +1634,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["EnableQuitKeys"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1670,7 +1647,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MaryTTSEnabled"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("cmu-slt-hsmm en_US female hmm")]
@@ -1683,7 +1660,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MaryTTSVoice"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1696,7 +1673,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MaryTTSLocation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -1709,7 +1686,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SpeechDelay"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("./Resources/CommuniKate/pageset.obz")]
@@ -1722,7 +1699,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKatePagesetLocation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1735,7 +1712,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateDefaultBoard"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1748,7 +1725,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["UsingCommuniKateKeyboardLayout"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1761,7 +1738,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateKeyboardPrevious1Context"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1774,7 +1751,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateKeyboardPrevious2Context"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1787,7 +1764,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateKeyboardPrevious3Context"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1800,7 +1777,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateKeyboardPrevious4Context"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -1813,7 +1790,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1826,7 +1803,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateSpeakSelected"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1839,7 +1816,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateSpeakSelectedVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -1852,7 +1829,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["CommuniKateSpeakSelectedRate"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1865,7 +1842,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["DynamicKeyboardsLocation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1878,7 +1855,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["StartupKeyboardFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -1891,7 +1868,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PluginsLocation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -1904,7 +1881,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["EnableAttentionKey"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Resources\\Sounds\\Attention.wav")]
@@ -1917,7 +1894,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["AttentionSoundFile"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1930,7 +1907,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["AttentionSoundVolume"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
@@ -1943,7 +1920,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["ToastNotificationMinimumTimeSeconds"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0500000")]
@@ -1956,7 +1933,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDragDelayAfterLeftMouseButtonDownBeforeMove"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0500000")]
@@ -1969,7 +1946,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDragDelayAfterMoveBeforeLeftMouseButtonUp"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
@@ -1982,7 +1959,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDragNumberOfSteps"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:00:00.0050000")]
@@ -1995,7 +1972,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["MouseDragDelayBetweenEachStep"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -2008,20 +1985,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["DisplayVoicesWhenChangingKeyboardLanguage"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public virtual bool LookToScrollEnabled {
-            get {
-                return ((bool)(this["LookToScrollEnabled"]));
-            }
-            set {
-                this["LookToScrollEnabled"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Free")]
@@ -2034,7 +1998,23 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollMode"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool LookToScrollShowOverlayWindow
+        {
+            get
+            {
+                return ((bool)(this["LookToScrollShowOverlayWindow"]));
+            }
+            set
+            {
+                this["LookToScrollShowOverlayWindow"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ScreenPoint")]
@@ -2047,20 +2027,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollBounds"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Medium")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public global::JuliusSweetland.OptiKey.Enums.LookToScrollSpeeds LookToScrollSpeed {
-            get {
-                return ((global::JuliusSweetland.OptiKey.Enums.LookToScrollSpeeds)(this["LookToScrollSpeed"]));
-            }
-            set {
-                this["LookToScrollSpeed"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -2073,7 +2040,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollHorizontalDeadzone"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
@@ -2086,137 +2053,20 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollVerticalDeadzone"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Medium")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollBaseSpeedSlow {
+        public LookToScrollSpeeds LookToScrollSpeed {
             get {
-                return ((decimal)(this["LookToScrollBaseSpeedSlow"]));
+                return ((LookToScrollSpeeds)(this["LookToScrollSpeed"]));
             }
             set {
-                this["LookToScrollBaseSpeedSlow"] = value;
+                this["LookToScrollSpeed"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollBaseSpeedMedium {
-            get {
-                return ((decimal)(this["LookToScrollBaseSpeedMedium"]));
-            }
-            set {
-                this["LookToScrollBaseSpeedMedium"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollBaseSpeedFast {
-            get {
-                return ((decimal)(this["LookToScrollBaseSpeedFast"]));
-            }
-            set {
-                this["LookToScrollBaseSpeedFast"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.005")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollAccelerationSlow {
-            get {
-                return ((decimal)(this["LookToScrollAccelerationSlow"]));
-            }
-            set {
-                this["LookToScrollAccelerationSlow"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.010")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollAccelerationMedium {
-            get {
-                return ((decimal)(this["LookToScrollAccelerationMedium"]));
-            }
-            set {
-                this["LookToScrollAccelerationMedium"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.020")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public decimal LookToScrollAccelerationFast {
-            get {
-                return ((decimal)(this["LookToScrollAccelerationFast"]));
-            }
-            set {
-                this["LookToScrollAccelerationFast"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public int LookToScrollIncrement {
-            get {
-                return ((int)(this["LookToScrollIncrement"]));
-            }
-            set {
-                this["LookToScrollIncrement"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1, 2, 4, 10, 12, 30, 60, 120")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public string LookToScrollIncrementChoices {
-            get {
-                return ((string)(this["LookToScrollIncrementChoices"]));
-            }
-            set {
-                this["LookToScrollIncrementChoices"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollDirectionInverted {
-            get {
-                return ((bool)(this["LookToScrollDirectionInverted"]));
-            }
-            set {
-                this["LookToScrollDirectionInverted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollLockDownBoundsKey {
-            get {
-                return ((bool)(this["LookToScrollLockDownBoundsKey"]));
-            }
-            set {
-                this["LookToScrollLockDownBoundsKey"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -2229,7 +2079,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollCentreMouseWhenActivated"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -2242,46 +2092,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollBringWindowToFrontWhenActivated"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollBringWindowToFrontAfterChoosingScreenPoint {
-            get {
-                return ((bool)(this["LookToScrollBringWindowToFrontAfterChoosingScreenPoint"]));
-            }
-            set {
-                this["LookToScrollBringWindowToFrontAfterChoosingScreenPoint"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollSuspendBeforeChoosingPointForMouse {
-            get {
-                return ((bool)(this["LookToScrollSuspendBeforeChoosingPointForMouse"]));
-            }
-            set {
-                this["LookToScrollSuspendBeforeChoosingPointForMouse"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollResumeAfterChoosingPointForMouse {
-            get {
-                return ((bool)(this["LookToScrollResumeAfterChoosingPointForMouse"]));
-            }
-            set {
-                this["LookToScrollResumeAfterChoosingPointForMouse"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
@@ -2294,20 +2105,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollDeactivateUponSwitchingKeyboards"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
-        public bool LookToScrollShowOverlayWindow {
-            get {
-                return ((bool)(this["LookToScrollShowOverlayWindow"]));
-            }
-            set {
-                this["LookToScrollShowOverlayWindow"] = value;
-            }
-        }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Yellow")]
@@ -2320,10 +2118,10 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollOverlayBoundsColour"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Orange")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Gray")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public string LookToScrollOverlayDeadzoneColour {
             get {
@@ -2333,10 +2131,10 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollOverlayDeadzoneColour"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public int LookToScrollOverlayBoundsThickness {
             get {
@@ -2346,10 +2144,10 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollOverlayBoundsThickness"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public int LookToScrollOverlayDeadzoneThickness {
             get {
@@ -2359,7 +2157,23 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["LookToScrollOverlayDeadzoneThickness"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public bool LookToScrollResumeAfterChoosingPointForMouse
+        {
+            get
+            {
+                return ((bool)(this["LookToScrollResumeAfterChoosingPointForMouse"]));
+            }
+            set
+            {
+                this["LookToScrollResumeAfterChoosingPointForMouse"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Home")]
@@ -2372,7 +2186,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["SimplifiedKeyboardContext"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -2385,7 +2199,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PresageDatabaseLocation"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11")]
@@ -2398,7 +2212,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["PresageNumberOfSuggestions"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<dictionary>\r\n  <item>\r\n    <key>\r\n     " +
@@ -2485,6 +2299,12 @@ namespace JuliusSweetland.OptiKey.Properties {
             "/functionKey>\r\n      </keyValue>\r\n    </key>\r\n    <value>\r\n      <ticks>PT1.75S<" +
             "/ticks>\r\n    </value>\r\n  </item>\r\n  <item>\r\n    <key>\r\n      <keyValue>\r\n       " +
             " <functionKey>GreekGreece</functionKey>\r\n      </keyValue>\r\n    </key>\r\n    <val" +
+            "ue>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </item>\r\n  <item>\r\n    <key>\r\n      <keyValue>\r\n       " +
+            " <functionKey>HebrewIsrael</functionKey>\r\n      </keyValue>\r\n    </key>\r\n    <val" +
+            "ue>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </item>\r\n  <item>\r\n    <key>\r\n      <keyValue>\r\n       " +
+            " <functionKey>HindiIndia</functionKey>\r\n      </keyValue>\r\n    </key>\r\n    <val" +
+            "ue>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </item>\r\n  <item>\r\n    <key>\r\n      <keyValue>\r\n       " +
+            " <functionKey>HungarianHungary</functionKey>\r\n      </keyValue>\r\n    </key>\r\n    <val" +
             "ue>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </item>\r\n  <item>\r\n    <key>\r" +
             "\n      <keyValue>\r\n        <functionKey>ItalianItaly</functionKey>\r\n      </keyV" +
             "alue>\r\n    </key>\r\n    <value>\r\n      <ticks>PT1.75S</ticks>\r\n    </value>\r\n  </" +
@@ -2598,7 +2418,7 @@ namespace JuliusSweetland.OptiKey.Properties {
                 this["KeySelectionTriggerFixationCompleteTimesByKeyValues"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("None")]
@@ -2802,6 +2622,86 @@ namespace JuliusSweetland.OptiKey.Properties {
             set
             {
                 this["AttemptRestartUponCrash"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual bool EnableResizeWithMouse
+        {
+            get
+            {
+                return ((bool)(this["EnableResizeWithMouse"]));
+            }
+            set
+            {
+                this["EnableResizeWithMouse"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual string EyeGestureFile
+        {
+            get
+            {
+                return ((string)(this["EyeGestureFile"]));
+            }
+            set
+            {
+                this["EyeGestureFile"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual string EyeGestureString
+        {
+            get
+            {
+                return ((string)(this["EyeGestureString"]));
+            }
+            set
+            {
+                this["EyeGestureString"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual bool EyeGesturesEnabled
+        {
+            get
+            {
+                return ((bool)(this["EyeGesturesEnabled"]));
+            }
+            set
+            {
+                this["EyeGesturesEnabled"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        public virtual bool EyeGestureUpdated
+        {
+            get
+            {
+                return ((bool)(this["EyeGestureUpdated"]));
+            }
+            set
+            {
+                this["EyeGestureUpdated"] = value;
             }
         }
 

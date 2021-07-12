@@ -3,7 +3,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using JuliusSweetland.OptiKey.Enums;
@@ -13,9 +12,11 @@ using JuliusSweetland.OptiKey.Native.Common.Enums;
 using JuliusSweetland.OptiKey.Native.Common.Structs;
 using JuliusSweetland.OptiKey.Static;
 using JuliusSweetland.OptiKey.Properties;
-using JuliusSweetland.OptiKey.UI.ViewModels.Keyboards;
 using log4net;
 using MahApps.Metro.Controls;
+using System.Collections.Generic;
+using System.Linq;
+using JuliusSweetland.OptiKey.Native.Common.Static;
 
 namespace JuliusSweetland.OptiKey.Services
 {
@@ -136,7 +137,7 @@ namespace JuliusSweetland.OptiKey.Services
 
         private const Int32 WM_ENTERSIZEMOVE = 0x0231;
         private const Int32 WM_EXITSIZEMOVE = 0x0232;
-        private const Int32 WM_NCLBUTTONDBLCLK = 0x00A3; 
+        private const Int32 WM_NCLBUTTONDBLCLK = 0x00A3;
 
         private const Int32 WM_SYSCOMMAND = 0x112;
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -163,7 +164,7 @@ namespace JuliusSweetland.OptiKey.Services
                     mouseResizeUnderway = false;
                     CoerceDockSizeAndPosition();
                     // restore resize grips 
-                    window.ResizeMode = System.Windows.ResizeMode.CanResizeWithGrip;
+                    window.ResizeMode = ResizeMode.CanResizeWithGrip;
                     break;
                 case WM_NCLBUTTONDBLCLK:
                     handled = true;  //prevent double click from maximizing the window.
@@ -207,16 +208,23 @@ namespace JuliusSweetland.OptiKey.Services
 
         public void DisableResize()
         {
+            if (window.ResizeMode == ResizeMode.NoResize)
+                return;
             window.ResizeMode = ResizeMode.NoResize;
             window.UpdateLayout();
         }
 
         public void SetResizeState()
         {
+            if (!Settings.Default.EnableResizeWithMouse)
+            {
+                DisableResize();
+                return;
+            }
+
             var windowState = getWindowState();
             switch (windowState)
             {
-                
                 case WindowStates.Floating:
                     window.ResizeMode = ResizeMode.CanResizeWithGrip;
                     break;
@@ -428,6 +436,11 @@ namespace JuliusSweetland.OptiKey.Services
             saveWindowState(windowState);
         }
 
+        public bool GetPersistedState()
+        {
+            return getPersistedState();
+        }
+
         public void IncrementOrDecrementOpacity(bool increment)
         {
             Log.InfoFormat("IncrementOrDecrementOpacity called with increment {0}", increment);
@@ -443,51 +456,33 @@ namespace JuliusSweetland.OptiKey.Services
         public void Maximise()
         {
             Log.Info("Maximise called");
-            var persistedState = getPersistedState();
-
             var windowState = getWindowState();
-            if (windowState != WindowStates.Maximised)
-            {
-                // make sure current state has been saved
-                if (persistedState)
-                    PersistSizeAndPosition();
-                savePreviousWindowState(windowState);
-            }
-            if (getWindowState() == WindowStates.Docked)
-            {
+
+            if (windowState == WindowStates.Maximised)
+                return;
+
+            if (windowState == WindowStates.Docked)
                 UnRegisterAppBar();
-            }
+
+            savePreviousWindowState(windowState);
             saveWindowState(WindowStates.Maximised);
             ApplySavedState();
-        }
-
-        public bool GetPersistedState()
-        {
-            return getPersistedState();
         }
 
         public void Minimise()
         {
             Log.Info("Minimise called");
-            var persistedState = getPersistedState();
+            var windowState = getWindowState();
 
-            //if minimising from a temporary state then switch to the persisted state to minimize
-            if (!persistedState)
-                savePersistedState(true); // smelly, but probs ok
+            if (windowState == WindowStates.Minimised)
+                return;
 
-            if (getWindowState() != WindowStates.Minimised)
-            {
-                if (persistedState)
-                    PersistSizeAndPosition();
-                savePreviousWindowState(getWindowState());
-            }
-            if (getWindowState() == WindowStates.Docked)
+            if (windowState == WindowStates.Docked)
                 UnRegisterAppBar();
+
+            savePreviousWindowState(windowState);
             saveWindowState(WindowStates.Minimised);
             ApplySavedState();
-
-            if (!persistedState)
-                savePersistedState(persistedState);
         }
 
         public void Move(MoveToDirections direction, double? amountInPx)
@@ -536,11 +531,9 @@ namespace JuliusSweetland.OptiKey.Services
         {
             Log.InfoFormat("OverridePersistedState called with PersistNewState {0}, WindowState {1}, Position {2}, Width {3}, Height {4}, horizontalOffset {5}, verticalOffset {6}", inPersistNewState, inWindowState, inPosition, inWidth, inHeight, inHorizontalOffset, inVerticalOffset);
 
-            // make sure current state has been saved before overriding
-            if (GetPersistedState())
-                PersistSizeAndPosition();
+            PersistSizeAndPosition();
 
-            WindowStates oldWindowState = getWindowState();
+            WindowStates activeWindowState = getWindowState();
             WindowStates newWindowState = Enum.TryParse(inWindowState, out newWindowState) ? newWindowState : getWindowState();
             DockEdges newDockPosition = Enum.TryParse(inPosition, out newDockPosition) ? newDockPosition : getDockPosition();
             DockSizes newDockSize = Enum.TryParse(inDockSize, out newDockSize) ? newDockSize : getDockSize();
@@ -561,8 +554,7 @@ namespace JuliusSweetland.OptiKey.Services
                             ? validNumber / Graphics.DipScalingFactorX
                 : validNumber / Graphics.DipScalingFactorX + screenBoundsInDp.Width;
 
-            newWidth = newWidth > (MIN_FLOATING_WIDTH_AS_PERCENTAGE_OF_SCREEN / 100d) * screenBoundsInDp.Width
-                ? newWidth : (MIN_FLOATING_WIDTH_AS_PERCENTAGE_OF_SCREEN / 100d) * screenBoundsInDp.Width;
+             newWidth = Math.Max(newWidth, .03 * screenBoundsInDp.Width);
 
             var newHeight = string.IsNullOrWhiteSpace(inHeight) || !double.TryParse(inHeight.Replace("%", ""), out validNumber) || validNumber < -9999 || validNumber > 9999
                 ? newWindowState == WindowStates.Floating
@@ -576,8 +568,10 @@ namespace JuliusSweetland.OptiKey.Services
                             ? validNumber / Graphics.DipScalingFactorY
                 : validNumber / Graphics.DipScalingFactorY + screenBoundsInDp.Height;
 
-            newHeight = newHeight > (MIN_FLOATING_HEIGHT_AS_PERCENTAGE_OF_SCREEN / 100d) * screenBoundsInDp.Height
-                ? newHeight : (MIN_FLOATING_HEIGHT_AS_PERCENTAGE_OF_SCREEN / 100d) * screenBoundsInDp.Height;
+            newHeight = Math.Max(newHeight, .03 * screenBoundsInDp.Width);
+
+            var newFullDockThicknessPercent = (newDockPosition == DockEdges.Top || newDockPosition == DockEdges.Bottom)
+                ? (100 * newHeight / screenBoundsInDp.Height) : (100 * newWidth / screenBoundsInDp.Width);
 
             var horizontalOffset = string.IsNullOrWhiteSpace(inHorizontalOffset) || !double.TryParse(inHorizontalOffset.Replace("%", ""), out validNumber) || validNumber < -9999 || validNumber > 9999
                 ? screenBoundsInDp.Left
@@ -591,54 +585,35 @@ namespace JuliusSweetland.OptiKey.Services
                     ? validNumber / 100d * screenBoundsInDp.Height
                 : validNumber / Graphics.DipScalingFactorY;
 
-            if (newWindowState == WindowStates.Docked)
+            double newTop = getFloatingSizeAndPosition().Top;
+            double newLeft = getFloatingSizeAndPosition().Left;
+            if (Enum.TryParse(inPosition, out MoveToDirections newMovePosition))
             {
-                savePersistedState(inPersistNewState);
-                saveDockPosition(newDockPosition);
-                saveDockSize(newDockSize);
+                newTop = (newMovePosition == MoveToDirections.Top || newMovePosition == MoveToDirections.TopLeft || newMovePosition == MoveToDirections.TopRight)
+                    ? screenBoundsInDp.Top + verticalOffset
+                    : (newMovePosition == MoveToDirections.Bottom || newMovePosition == MoveToDirections.BottomLeft || newMovePosition == MoveToDirections.BottomRight)
+                    ? screenBoundsInDp.Bottom - newHeight + verticalOffset
+                    : screenBoundsInDp.Height / 2d - newHeight / 2d + verticalOffset;
 
-                var newFullDockThicknessPercent = (newDockPosition == DockEdges.Top || newDockPosition == DockEdges.Bottom)
-                    ? (100 * newHeight / screenBoundsInDp.Height) : (100 * newWidth / screenBoundsInDp.Width);
-
-                if (newDockSize == DockSizes.Collapsed)
-                    saveCollapsedDockThicknessAsPercentageOfFullDockThickness(100 * newFullDockThicknessPercent / getFullDockThicknessAsPercentageOfScreen());
-                else
-                    saveFullDockThicknessAsPercentageOfScreen(newFullDockThicknessPercent);
-            }
-            else if (newWindowState == WindowStates.Floating)
-            {
-                double newTop = getFloatingSizeAndPosition().Top;
-                double newLeft = getFloatingSizeAndPosition().Left;
-                if (Enum.TryParse(inPosition, out MoveToDirections newMovePosition))
-                {
-                    newTop = (newMovePosition == MoveToDirections.Top || newMovePosition == MoveToDirections.TopLeft || newMovePosition == MoveToDirections.TopRight)
-                        ? screenBoundsInDp.Top + verticalOffset
-                        : (newMovePosition == MoveToDirections.Bottom || newMovePosition == MoveToDirections.BottomLeft || newMovePosition == MoveToDirections.BottomRight)
-                        ? screenBoundsInDp.Bottom - newHeight + verticalOffset
-                        : screenBoundsInDp.Height / 2d - newHeight / 2d + verticalOffset;
-
-                    newLeft = (newMovePosition == MoveToDirections.Left || newMovePosition == MoveToDirections.TopLeft || newMovePosition == MoveToDirections.BottomLeft)
-                        ? screenBoundsInDp.Left + horizontalOffset
-                        : (newMovePosition == MoveToDirections.Right || newMovePosition == MoveToDirections.TopRight || newMovePosition == MoveToDirections.BottomRight)
-                        ? screenBoundsInDp.Right - newWidth + horizontalOffset
-                        : screenBoundsInDp.Width / 2d - newWidth / 2d + horizontalOffset;
-                }
-                if (oldWindowState == WindowStates.Docked)
-                    UnRegisterAppBar();
-                savePersistedState(inPersistNewState);
-                saveFloatingSizeAndPosition(new Rect(newLeft, newTop, newWidth, newHeight));
-            }
-            else
-            {
-                if (oldWindowState == WindowStates.Docked)
-                    UnRegisterAppBar();
-                savePersistedState(inPersistNewState);
+                newLeft = (newMovePosition == MoveToDirections.Left || newMovePosition == MoveToDirections.TopLeft || newMovePosition == MoveToDirections.BottomLeft)
+                    ? screenBoundsInDp.Left + horizontalOffset
+                    : (newMovePosition == MoveToDirections.Right || newMovePosition == MoveToDirections.TopRight || newMovePosition == MoveToDirections.BottomRight)
+                    ? screenBoundsInDp.Right - newWidth + horizontalOffset
+                    : screenBoundsInDp.Width / 2d - newWidth / 2d + horizontalOffset;
             }
 
-            savePreviousWindowState(oldWindowState);
+            if (activeWindowState == WindowStates.Docked && newWindowState != WindowStates.Docked)
+                UnRegisterAppBar();
+
+            savePersistedState(inPersistNewState);
+            saveFloatingSizeAndPosition(new Rect(newLeft, newTop, newWidth, newHeight));
+            saveDockPosition(newDockPosition);
+            saveDockSize(newDockSize);
+            saveFullDockThicknessAsPercentageOfScreen(newFullDockThicknessPercent);
+            saveCollapsedDockThicknessAsPercentageOfFullDockThickness(100 * newFullDockThicknessPercent / getFullDockThicknessAsPercentageOfScreen());
+            savePreviousWindowState(activeWindowState);
             saveWindowState(newWindowState);
             ApplySavedState();
-
         }
 
         public void ResizeDockToCollapsed()
@@ -648,7 +623,7 @@ namespace JuliusSweetland.OptiKey.Services
             if (getWindowState() != WindowStates.Docked) return;
 
             // Turn off grab handles, to avoid ambiguous requests
-            window.ResizeMode = ResizeMode.NoResize;
+            DisableResize();
 
             saveDockSize(DockSizes.Collapsed);
             var dockSizeAndPositionInPx = CalculateDockSizeAndPositionInPx(getDockPosition(), DockSizes.Collapsed);
@@ -661,39 +636,35 @@ namespace JuliusSweetland.OptiKey.Services
 
             if (getWindowState() != WindowStates.Docked) return;
 
-            // Turn grab handles back on
-            window.ResizeMode = ResizeMode.CanResizeWithGrip;
+            SetResizeState();
 
             saveDockSize(DockSizes.Full);
             var dockSizeAndPositionInPx = CalculateDockSizeAndPositionInPx(getDockPosition(), DockSizes.Full);
             SetAppBarSizeAndPosition(getDockPosition(), dockSizeAndPositionInPx); //PersistSizeAndPosition() is called indirectly by SetAppBarSizeAndPosition - no need to call explicitly
         }
 
-        public void RestorePersistedState(bool saveState = false)
+        public void RestorePersistedState()
         {
             Log.Info("RestorePersistedState called");
 
-            if (getPersistedState() || getWindowState() == WindowStates.Minimised) { return; }
+            if (getPersistedState()) return;
 
-            if (getPreviousWindowState() != WindowStates.Docked && getWindowState() == WindowStates.Docked)
+            var activeWindowState = getWindowState();
+            if (activeWindowState != WindowStates.Docked && activeWindowState != WindowStates.Floating && activeWindowState != WindowStates.Maximised) return;
+
+            savePersistedState(true);
+            var persistedWindowState = getWindowState();
+
+            if (activeWindowState == WindowStates.Docked && persistedWindowState != WindowStates.Docked)
                 UnRegisterAppBar();
 
-            savePersistedState(saveState);
-
-            if (saveState)
-            {
-                Log.Info("Restoring keyboard to default values");
-
-                ApplySavedState();
-                ResizeDockToFull();
-            }
+            ApplySavedState();
+            ResizeDockToFull();
         }
 
         public void Restore()
         {
             Log.Info("Restore called");
-
-            if (!getPersistedState()) return;
 
             var windowState = getWindowState();
             if (windowState != WindowStates.Maximised && windowState != WindowStates.Minimised && windowState != WindowStates.Hidden) return;
@@ -827,7 +798,7 @@ namespace JuliusSweetland.OptiKey.Services
                     }
                     else if (dockPosition == DockEdges.Left &&
                         (direction == ShrinkFromDirections.Right || direction == ShrinkFromDirections.TopRight || direction == ShrinkFromDirections.BottomRight))
-                    {
+                   {
                         if (dockSize == DockSizes.Full)
                         {
                             xAdjustmentFromRight = xAdjustmentFromRight.CoerceToLowerLimit(0 - maxFullDockWidthAdjustment);
@@ -864,9 +835,109 @@ namespace JuliusSweetland.OptiKey.Services
             }
         }
 
+        public void InvokeMoveWindow(string parameterString)
+        {
+            var parameterArray = parameterString.Split(',');
+            var handle = GetTopWindows();
+            //SW_MAXIMIZE = 3, SW_MINIMIZE = 6, SW_RESTORE = 9
+            var nCmdShow = parameterString.Substring(0, 2).ToLower() == "ma"
+                ? 3 : parameterString.Substring(0, 2).ToLower() == "mi" ? 6 : 9;
+            
+            PInvoke.ShowWindow(handle, nCmdShow);
+
+            if (nCmdShow != 9)
+                return;
+
+            Func<string, double, double, double> getValue = (param, multiplier, original) =>
+            {
+                return string.IsNullOrWhiteSpace(param) ? double.NaN
+                : double.TryParse(param.Replace("%", ""), out double result) && !param.Contains("%") ? result
+                : multiplier * result / 100;
+            };
+
+            var bounds = GetWindowBounds(handle);
+            if (bounds != null)
+            {
+                var left = getValue(parameterArray[0], screenBoundsInPx.Width, bounds.Value.Left);
+                var top = getValue(parameterArray[1], screenBoundsInPx.Height, bounds.Value.Top);
+                var right = getValue(parameterArray[2], screenBoundsInPx.Width, bounds.Value.Right);
+                var bottom = getValue(parameterArray[3], screenBoundsInPx.Height, bounds.Value.Bottom);
+
+                if (left == double.NaN)
+                {
+                    left = right == double.NaN ? bounds.Value.Left
+                        : (right - (bounds.Value.Right - bounds.Value.Left)).CoerceToLowerLimit(0);
+                }
+                if (top == double.NaN)
+                {
+                    top = bottom == double.NaN ? bounds.Value.Top
+                        : (bottom - (bounds.Value.Bottom - bounds.Value.Top)).CoerceToLowerLimit(0);
+                }
+                if (right == double.NaN)
+                {
+                    right = (left + (bounds.Value.Right - bounds.Value.Left)).CoerceToUpperLimit(screenBoundsInPx.Width);
+                }
+                if (bottom == double.NaN)
+                {
+                    bottom = (top + (bounds.Value.Bottom - bounds.Value.Top)).CoerceToUpperLimit(screenBoundsInPx.Height);
+                }
+
+                PInvoke.MoveWindow(handle, (int)left, (int)top, (int)(right - left), (int)(bottom - top), true);
+            }
+        }
+
         #endregion
 
         #region Private Methods
+
+        private IntPtr GetTopWindows()
+        {
+            IntPtr shellWindow = PInvoke.GetShellWindow();
+
+            Func<IntPtr, bool> criteria = hWnd =>
+            {
+                if (hWnd == shellWindow || hWnd == this.windowHandle)
+                    return false;
+
+                if (!PInvoke.IsWindowVisible(hWnd) || PInvoke.IsIconic(hWnd))
+                    return false;
+
+                var style = Static.Windows.GetWindowStyle(hWnd);
+                if ((style & WindowStyles.WS_POPUP) != 0 && (style & WindowStyles.WS_THICKFRAME) == 0 && (style & WindowStyles.WS_DLGFRAME) == 0)
+                    return false;
+
+                var exStyle = Static.Windows.GetExtendedWindowStyle(hWnd);
+                if (exStyle.HasFlag(ExtendedWindowStyles.WS_EX_TRANSPARENT))
+                    return false;
+
+                Rect? bounds = GetWindowBounds(hWnd);
+                return bounds.HasValue && bounds.Value.IntersectsWith(new Rect(0, 0, screen.Bounds.Width, screen.Bounds.Height));
+            };
+
+            // Find the front-most top-level window that matches our criteria (expanding UWP apps into their CoreWindows).
+            List<IntPtr> windows = Static.Windows.GetHandlesOfTopLevelWindows();
+            windows = Static.Windows.ReplaceUWPTopLevelWindowsWithCoreWindowChildren(windows);
+            windows = windows.Where(criteria).ToList();
+            return Static.Windows.GetFrontmostWindow(windows);
+        }
+
+        private Rect? GetWindowBounds(IntPtr hWnd)
+        {
+            RECT rawRect;
+            if (PInvoke.IsWindow(hWnd))
+            {
+                if (PInvoke.DwmGetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.ExtendedFrameBounds, out rawRect, Marshal.SizeOf<RECT>()) != 0
+                    || (PInvoke.GetWindowRect(hWnd, out rawRect)))
+                    return new Rect
+                    {
+                        X = rawRect.Left,
+                        Y = rawRect.Top,
+                        Width = rawRect.Right - rawRect.Left,
+                        Height = rawRect.Bottom - rawRect.Top
+                    };
+            }
+            return null;
+        }
 
         private IntPtr AppBarPositionChangeCallback(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -1047,6 +1118,8 @@ namespace JuliusSweetland.OptiKey.Services
         {
             Log.Info("CalculateMinimisedSizeAndPosition called.");
 
+            var persitedState = getPersistedState();
+            savePersistedState(true);
             double x, y;
             var thicknessAsPercentage = (getFullDockThicknessAsPercentageOfScreen() * getCollapsedDockThicknessAsPercentageOfFullDockThickness()) / 10000; //Percentage of a percentage
             var height = screenBoundsInPx.Height * thicknessAsPercentage;
@@ -1108,6 +1181,7 @@ namespace JuliusSweetland.OptiKey.Services
                     break;
             }
 
+            savePersistedState(persitedState);
             return new Rect(x, y, width, height);
         }
 
@@ -1584,6 +1658,8 @@ namespace JuliusSweetland.OptiKey.Services
         public void PersistSizeAndPosition()
         {
             Log.Info("PersistSizeAndPosition called");
+
+            if (!getPersistedState() || !SizeAndPositionIsInitialised) return;
 
             var windowState = getWindowState();
             switch (windowState)

@@ -117,6 +117,8 @@ namespace JuliusSweetland.OptiKey.Pro
 
                 CleanupAndPrepareCommuniKateInitialState();
 
+                ValidateEyeGesturesFile();
+
                 ValidateDynamicKeyboardLocation();
 
                 // Handle plugins. Validate if directory exists and is accessible and pre-load all plugins, building a in-memory list of available ones.
@@ -182,7 +184,8 @@ namespace JuliusSweetland.OptiKey.Pro
                 //Show the main window
                 mainWindow.Show();
 
-                if (Settings.Default.LookToScrollEnabled && Settings.Default.LookToScrollShowOverlayWindow)
+                if (Settings.Default.LookToScrollOverlayBoundsThickness > 0
+                    || Settings.Default.LookToScrollOverlayDeadzoneThickness > 0)
                 {
                     // Create the overlay window, but don't show it yet. It'll make itself visible when the conditions are right.
                     new LookToScrollOverlayWindow(mainViewModel);

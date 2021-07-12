@@ -15,6 +15,7 @@ namespace JuliusSweetland.OptiKey.Models
         [XmlElement("KeyToggle", typeof(DynamicKeyToggle))]
         [XmlElement("Loop", typeof(DynamicLoop))]
         [XmlElement("Plugin", typeof(DynamicPlugin))]
+        [XmlElement("MoveWindow", typeof(DynamicMove))]
         [XmlElement("Text", typeof(DynamicText))]
         [XmlElement("Wait", typeof(DynamicWait))]
         public List<XmlDynamicKey> Commands { get; } = new List<XmlDynamicKey>();
@@ -42,14 +43,14 @@ namespace JuliusSweetland.OptiKey.Models
         public string Value { get; set; }
 
         [XmlIgnore]
-        public bool BackReturnsHere
+        public bool BackAction
         { get; set; } = true;
 
         [XmlAttribute("BackReturnsHere")]
-        public string BackReturnsHereAsString
+        public string BackActionString
         {
-            get { return this.BackReturnsHere ? "True" : "False"; }
-            set { this.BackReturnsHere = XmlUtils.ConvertToBoolean(value); }
+            get { return this.BackAction ? "True" : "False"; }
+            set { this.BackAction = XmlUtils.ConvertToBoolean(value); }
         }
     }
 
@@ -82,11 +83,18 @@ namespace JuliusSweetland.OptiKey.Models
         [XmlElement("KeyToggle", typeof(DynamicKeyToggle))]
         [XmlElement("Loop", typeof(DynamicLoop))]
         [XmlElement("Plugin", typeof(DynamicPlugin))]
+        [XmlElement("MoveWindow", typeof(DynamicMove))]
         [XmlElement("Text", typeof(DynamicText))]
         [XmlElement("Wait", typeof(DynamicWait))]
         public List<XmlDynamicKey> LoopCommands { get; } = new List<XmlDynamicKey>();
 
         [XmlAttribute] public int Count { get; set; } = 1; //The number of loop repetitions
+    }
+
+    public class DynamicMove : XmlDynamicKey
+    {
+        [XmlText]
+        public string Value { get; set; }
     }
 
     public class DynamicText : XmlDynamicKey

@@ -48,11 +48,8 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 {
                     mouseOutputService.MoveTo(CurrentPositionPoint);
                 }
-
-                if (Settings.Default.LookToScrollEnabled)
-                {
-                    UpdateLookToScroll(CurrentPositionPoint);
-                }
+                
+                UpdateLookToScroll(CurrentPositionPoint);
             };
 
             inputServiceSelectionProgressHandler = (o, progress) =>
@@ -196,12 +193,15 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
         private void ProcessChangeKeyboardKeyValue(ChangeKeyboardKeyValue keyValue)
         {
-            var currentKeyboard = Keyboard;
+            if (Keyboard is Minimised)
+            {
+                if (keyValue.BuiltInKeyboard.Value == Enums.Keyboards.Minimised
+                    || keyValue.FunctionKey.Value == Enums.FunctionKeys.Minimise)
+                    return;
+            }
 
             Action backAction = () => { };
-            Action exitAction = () => { };
-            Action enterAction = () => { };
-
+            var currentKeyboard = Keyboard;
             // Set up back action
             if (keyValue.Replace)
             {
@@ -220,7 +220,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 };
             }
 
-            if (keyValue.BuiltInKeyboard.HasValue)
+            if (keyValue.BuiltInKeyboard.HasValue) 
             {
                 SetKeyboardFromEnum(keyValue.BuiltInKeyboard.Value, mainWindowManipulationService, backAction);
             }
@@ -640,11 +640,22 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 case FunctionKeys.Plugin:
                     RunPlugin_Legacy(singleKeyValue.String);
                     break;
+
+                default:
+                    //Process single key text, THEN function key. The use case might be to output text and then change keyboard, for example.
+                    //N.B. Combining text and a function key changes the KeyValue, which will impact whether the KeyValue can be used to detect
+                    //a key which can be locked down, or anything keyed on that KeyValue.
+                    keyboardOutputService.ProcessSingleKeyText(singleKeyValue.String);
+                    HandleFunctionKeySelectionResult(singleKeyValue);
+                break;
             }
         }
 
         private async void HandleFunctionKeySelectionResult(KeyValue singleKeyValue)
         {
+            if (Keyboard is Minimised && singleKeyValue.FunctionKey.Value == FunctionKeys.Minimise)
+                return;
+
             var currentKeyboard = Keyboard;
             Action resumeLookToScroll;
 
@@ -668,6 +679,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 case FunctionKeys.Alpha2Keyboard:
                     Log.Info("Changing keyboard to Alpha2.");
                     Keyboard = new Alpha2();
+                    break;
+
+                case FunctionKeys.Alpha3Keyboard:
+                    Log.Info("Changing keyboard to Alpha3.");
+                    Keyboard = new Alpha3();
                     break;
 
                 case FunctionKeys.Attention:
@@ -769,20 +785,22 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     var opacityBeforeConversationAlpha1 = mainWindowManipulationService.GetOpacity();
                     Action conversationAlpha1BackAction = currentKeyboard is ConversationAlpha2
                         ? ((ConversationAlpha2)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
-                            ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
-                            : currentKeyboard is SimplifiedConversationAlpha
-                                ? ((SimplifiedConversationAlpha)currentKeyboard).BackAction
-                                : currentKeyboard is ConversationConfirm
-                                    ? ((ConversationConfirm)currentKeyboard).BackAction
-                                    : () =>
-                                    {
-                                        Log.Info("Restoring window size.");
-                                        mainWindowManipulationService.Restore();
-                                        Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeConversationAlpha1);
-                                        mainWindowManipulationService.SetOpacity(opacityBeforeConversationAlpha1);
-                                        Keyboard = currentKeyboard;
-                                    };
+                        : currentKeyboard is ConversationAlpha3
+                            ? ((ConversationAlpha3)currentKeyboard).BackAction
+                            : currentKeyboard is ConversationNumericAndSymbols
+                                ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                                : currentKeyboard is SimplifiedConversationAlpha
+                                    ? ((SimplifiedConversationAlpha)currentKeyboard).BackAction
+                                    : currentKeyboard is ConversationConfirm
+                                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                                        : () =>
+                                        {
+                                            Log.Info("Restoring window size.");
+                                            mainWindowManipulationService.Restore();
+                                            Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeConversationAlpha1);
+                                            mainWindowManipulationService.SetOpacity(opacityBeforeConversationAlpha1);
+                                            Keyboard = currentKeyboard;
+                                        };
                     Keyboard = new ConversationAlpha1(conversationAlpha1BackAction);
                     Log.Info("Maximising window.");
                     mainWindowManipulationService.Maximise();
@@ -795,7 +813,37 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     var opacityBeforeConversationAlpha2 = mainWindowManipulationService.GetOpacity();
                     Action conversationAlpha2BackAction = currentKeyboard is ConversationAlpha1
                         ? ((ConversationAlpha1)currentKeyboard).BackAction
-                        : currentKeyboard is ConversationNumericAndSymbols
+                        : currentKeyboard is ConversationAlpha3
+                            ? ((ConversationAlpha3)currentKeyboard).BackAction
+                            : currentKeyboard is ConversationNumericAndSymbols
+                                ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
+                                : currentKeyboard is SimplifiedConversationAlpha
+                                    ? ((SimplifiedConversationAlpha)currentKeyboard).BackAction
+                                    : currentKeyboard is ConversationConfirm
+                                        ? ((ConversationConfirm)currentKeyboard).BackAction
+                                        : () =>
+                                        {
+                                            Log.Info("Restoring window size.");
+                                            mainWindowManipulationService.Restore();
+                                            Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeConversationAlpha2);
+                                            mainWindowManipulationService.SetOpacity(opacityBeforeConversationAlpha2);
+                                            Keyboard = currentKeyboard;
+                                        };
+                    Keyboard = new ConversationAlpha2(conversationAlpha2BackAction);
+                    Log.Info("Maximising window.");
+                    mainWindowManipulationService.Maximise();
+                    Log.InfoFormat("Setting opacity to 1 (fully opaque)");
+                    mainWindowManipulationService.SetOpacity(1);
+                    break;
+
+                case FunctionKeys.ConversationAlpha3Keyboard:
+                    Log.Info("Changing keyboard to ConversationAlpha3.");
+                    var opacityBeforeConversationAlpha3 = mainWindowManipulationService.GetOpacity();
+                    Action conversationAlpha3BackAction = currentKeyboard is ConversationAlpha1
+                        ? ((ConversationAlpha1)currentKeyboard).BackAction
+                        : currentKeyboard is ConversationAlpha2
+                            ? ((ConversationAlpha2)currentKeyboard).BackAction
+                            : currentKeyboard is ConversationNumericAndSymbols
                             ? ((ConversationNumericAndSymbols)currentKeyboard).BackAction
                             : currentKeyboard is SimplifiedConversationAlpha
                                 ? ((SimplifiedConversationAlpha)currentKeyboard).BackAction
@@ -805,11 +853,11 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                     {
                                         Log.Info("Restoring window size.");
                                         mainWindowManipulationService.Restore();
-                                        Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeConversationAlpha2);
-                                        mainWindowManipulationService.SetOpacity(opacityBeforeConversationAlpha2);
+                                        Log.InfoFormat("Restoring window opacity to {0}", opacityBeforeConversationAlpha3);
+                                        mainWindowManipulationService.SetOpacity(opacityBeforeConversationAlpha3);
                                         Keyboard = currentKeyboard;
                                     };
-                    Keyboard = new ConversationAlpha2(conversationAlpha2BackAction);
+                    Keyboard = new ConversationAlpha3(conversationAlpha3BackAction);
                     Log.Info("Maximising window.");
                     mainWindowManipulationService.Maximise();
                     Log.InfoFormat("Setting opacity to 1 (fully opaque)");
@@ -1136,6 +1184,10 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                     SelectLanguage(Languages.HebrewIsrael);
                     break;
 
+                case FunctionKeys.HindiIndia:
+                    SelectLanguage(Languages.HindiIndia);
+                    break;
+
                 case FunctionKeys.HungarianHungary:
                     SelectLanguage(Languages.HungarianHungary);
                     break;
@@ -1166,22 +1218,6 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 case FunctionKeys.LookToScrollActive:
                     ToggleLookToScroll();
-                    break;
-
-                case FunctionKeys.LookToScrollBounds:
-                    HandleLookToScrollBoundsKeySelected();
-                    break;
-
-                case FunctionKeys.LookToScrollIncrement:
-                    SelectNextLookToScrollIncrement();
-                    break;
-
-                case FunctionKeys.LookToScrollMode:
-                    SelectNextLookToScrollMode();
-                    break;
-
-                case FunctionKeys.LookToScrollSpeed:
-                    SelectNextLookToScrollSpeed();
                     break;
 
                 case FunctionKeys.MenuKeyboard:
@@ -2253,7 +2289,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                         string textFromScratchpad = KeyboardOutputService.Text;
 
                         if (!string.IsNullOrEmpty(textFromScratchpad))
-                        { 
+                        {
                             TranslationService.Response response = await translationService.Translate(textFromScratchpad);
                             if (response.Status == "Error")
                             {
@@ -2261,7 +2297,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                                 audioService.PlaySound(Settings.Default.ErrorSoundFile, Settings.Default.ErrorSoundVolume);
                                 RaiseToastNotification(Resources.ERROR_DURING_TRANSLATION, response.ExceptionMessage, NotificationTypes.Error, () =>
                                 {
-                                     inputService.RequestResume();
+                                    inputService.RequestResume();
                                 });
                             }
                             else
@@ -2426,12 +2462,16 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 TimeSpanOverrides timeSpanOverrides = null;
                 inputService.OverrideTimesByKey?.TryGetValue(singleKeyValue, out timeSpanOverrides);
 
+                //Action the key's command list before setting the key to Down/LockedDown to avoid a scenario where the command changes the keyboard
+                //to one which toggles SimulateKeyStrokes, which results in all key states being stored and restored when leaving the keyboard. This
+                //incorrectly stores the key Down/LockedDown state, which is restored when we leave the keyboard. This *should* be safe as the command
+                //key's value is different from the key values of each individual command.
+                await CommandList(singleKeyValue, multiKeySelection, commandList, 0);
+
                 //if there is an override lock down time then do not set the key to LockedDown
-                keyStateService.KeyDownStates[singleKeyValue].Value = timeSpanOverrides != null && timeSpanOverrides.TimeRequiredToLockDown > TimeSpan.Zero 
+                keyStateService.KeyDownStates[singleKeyValue].Value = timeSpanOverrides != null && timeSpanOverrides.TimeRequiredToLockDown > TimeSpan.Zero
                     ? KeyDownStates.Down : KeyDownStates.LockedDown;
 
-                await CommandList(singleKeyValue, multiKeySelection, commandList, 0);
-                
                 //if there is an override lock down time then run this key until the gaze stops or another trigger stops it
                 if (timeSpanOverrides != null && timeSpanOverrides.TimeRequiredToLockDown > TimeSpan.Zero)
                 {
@@ -2494,7 +2534,7 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
 
                 if (keyCommand.Name == KeyCommands.Loop)
                 {
-                    var loopCount = Int32.Parse(keyCommand.Value);
+                    var loopCount = int.TryParse(keyCommand.Value, out var i) ? i : 0;
                     var logMessage = loopCount > 0 ? loopCount + " times" : "indefinitely until stopped";
                     Log.InfoFormat("CommandList: Looping {0}", logMessage);
 
@@ -2525,68 +2565,76 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 }
                 else
                 {
-                    if (keyCommand.Name == KeyCommands.Action)
+                    if (keyCommand.Name == KeyCommands.Function)
                     {
-                        Log.InfoFormat("CommandList: Press function key: {0}", keyCommand.KeyValue.FunctionKey.ToString());
-                        KeySelectionResult(keyCommand.KeyValue, multiKeySelection);
+                        Log.InfoFormat("CommandList: Press function key: {0}", keyCommand.Value);
+                         if (Enum.TryParse(keyCommand.Value, out FunctionKeys fk))
+                            KeySelectionResult(new KeyValue(fk), multiKeySelection);
                     }
                     else if (keyCommand.Name == KeyCommands.ChangeKeyboard)
                     {
                         Log.InfoFormat("CommandList: Change keyboard");
-                        KeySelectionResult(keyCommand.KeyValue, multiKeySelection);
+                        var keyValue = Enum.TryParse(keyCommand.Value, out Enums.Keyboards keyboardEnum)
+                            ? new ChangeKeyboardKeyValue(keyboardEnum, (bool)keyCommand.BackAction)
+                            : new ChangeKeyboardKeyValue(keyCommand.Value, (bool)keyCommand.BackAction);
+                        KeySelectionResult(keyValue, multiKeySelection);
                     }
                     else if (keyCommand.Name == KeyCommands.KeyDown)
                     {
-                        Log.InfoFormat("CommandList: Key down on [{0}] key", keyCommand.KeyValue.String);
-                        await keyboardOutputService.ProcessSingleKeyPress(keyCommand.KeyValue.String, KeyPressKeyValue.KeyPressType.Press);
-                        keyStateService.KeyDownStates[keyCommand.KeyValue].Value = KeyDownStates.LockedDown;
+                        Log.InfoFormat("CommandList: Key down on [{0}] key", keyCommand.Value);
+                        await keyboardOutputService.ProcessSingleKeyPress(keyCommand.Value, KeyPressKeyValue.KeyPressType.Press);
+                        keyStateService.KeyDownStates[new KeyValue(keyCommand.Value)].Value = KeyDownStates.LockedDown;
                     }
                     else if (keyCommand.Name == KeyCommands.KeyToggle)
                     {
-                        if (keyStateService.KeyDownStates[keyCommand.KeyValue].Value != KeyDownStates.Up)
+                        if (keyStateService.KeyDownStates[new KeyValue(keyCommand.Value)].Value != KeyDownStates.Up)
                         {
-                            Log.InfoFormat("CommandList: Toggle key up on [{0}] key", keyCommand.KeyValue.String);
-                            await KeyUpProcessing(singleKeyValue, keyCommand.KeyValue);
+                            Log.InfoFormat("CommandList: Toggle key up on [{0}] key", keyCommand.Value);
+                            await KeyUpProcessing(singleKeyValue, new KeyValue(keyCommand.Value));
                         }
                         else
                         {
-                            Log.InfoFormat("CommandList: Toggle key down on [{0}] key", keyCommand.KeyValue.String);
-                            await keyboardOutputService.ProcessSingleKeyPress(keyCommand.KeyValue.String, KeyPressKeyValue.KeyPressType.Press);
-                            keyStateService.KeyDownStates[keyCommand.KeyValue].Value = KeyDownStates.LockedDown;
+                            Log.InfoFormat("CommandList: Toggle key down on [{0}] key", keyCommand.Value);
+                            await keyboardOutputService.ProcessSingleKeyPress(keyCommand.Value, KeyPressKeyValue.KeyPressType.Press);
+                            keyStateService.KeyDownStates[new KeyValue(keyCommand.Value)].Value = KeyDownStates.LockedDown;
                         }
                     }
                     else if (keyCommand.Name == KeyCommands.KeyUp)
                     {
-                        Log.InfoFormat("CommandList: Key up on [{0}]", keyCommand.KeyValue.String);
-                        await KeyUpProcessing(singleKeyValue, keyCommand.KeyValue);
+                        Log.InfoFormat("CommandList: Key up on [{0}]", keyCommand.Value);
+                        await KeyUpProcessing(singleKeyValue, new KeyValue(keyCommand.Value));
 
                         //the KeyUp value could be a KeyGroup so add any matches from KeyValueByGroup
-                        if (keyStateService.KeyValueByGroup.ContainsKey(keyCommand.KeyValue.String.ToUpper()))
+                        if (keyStateService.KeyValueByGroup.ContainsKey(keyCommand.Value.ToUpper()))
                         {
                             var keyValueList = new List<KeyValue>();
-                            keyValueList.Add(keyCommand.KeyValue);
-                            keyValueList.AddRange(KeyStateService.KeyValueByGroup[keyCommand.KeyValue.String.ToUpper()]);
+                            keyValueList.Add(new KeyValue(keyCommand.Value));
+                            keyValueList.AddRange(KeyStateService.KeyValueByGroup[keyCommand.Value.ToUpper()]);
                             foreach (var keyValue in keyValueList.Where(x => x != null && keyStateService.KeyDownStates[x].Value != KeyDownStates.Up))
                             {
                                 await KeyUpProcessing(singleKeyValue, keyValue);
                             }
                         }
                     }
+                    else if (keyCommand.Name == KeyCommands.MoveWindow)
+                    {
+                        mainWindowManipulationService.InvokeMoveWindow(keyCommand.Value);
+                    }
                     else if (keyCommand.Name == KeyCommands.Text)
                     {
-                        Log.InfoFormat("CommandList: Text of [{0}]", keyCommand.KeyValue.String);
-                        KeySelectionResult(keyCommand.KeyValue, multiKeySelection);
+                        Log.InfoFormat("CommandList: Text of [{0}]", keyCommand.Value);
+                        KeySelectionResult(new KeyValue(keyCommand.Value), multiKeySelection);
                     }
                     else if (keyCommand.Name == KeyCommands.Wait)
                     {
-                        var waitMs = int.Parse(keyCommand.Value);
+                        var waitMs = int.TryParse(keyCommand.Value, out var i) ? i : 500;
                         Log.InfoFormat("CommandList: Wait of {0}ms", waitMs);
                         await Task.Delay(waitMs);
                     }
                     else if (keyCommand.Name == KeyCommands.Plugin)
                     {
                         Log.InfoFormat("CommandList: Plugin [{0}]", keyCommand.Value);
-                        RunDynamicPlugin(keyCommand.Plugin);
+                        RunDynamicPlugin(keyCommand);
                     }
                 }
             }
@@ -2627,15 +2675,15 @@ namespace JuliusSweetland.OptiKey.UI.ViewModels
                 keyStateService.KeyRunningStates[commandKey].Value = false;
         }
 
-        private void RunDynamicPlugin(DynamicPlugin pluginKey)
+        private void RunDynamicPlugin(KeyCommand keyCommand)
         {
-            Log.InfoFormat("Running plugin [{0}]", pluginKey.Name);
+            Log.InfoFormat("Running plugin [{0}]", keyCommand.Value);
 
             // Build plugin context
             Dictionary<string, string> context = BuildPluginContext();
             try
             {
-                PluginEngine.RunDynamicPlugin(context, pluginKey);
+                PluginEngine.RunDynamicPlugin(context, keyCommand);
             }
             catch (Exception exception)
             {
